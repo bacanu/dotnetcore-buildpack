@@ -30,7 +30,7 @@ function install_dotnet() {
     mkdir -p ${DOTNET_CACHE_LOCATION}/{sdk,runtime}
 
     topic "Fetching .NET SDK"
-    local DOTNET_SDK_DOWNLOAD_URL=https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-x64.tar.gz
+    local DOTNET_SDK_DOWNLOAD_URL=https://dotnetcli.azureedge.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-x64.tar.gz
     info "curl ${DOTNET_SDK_DOWNLOAD_URL} untar to ${DOTNET_CACHE_LOCATION}"
     curl -sSL ${DOTNET_SDK_DOWNLOAD_URL} | tar xz -C ${DOTNET_CACHE_LOCATION}/sdk
     info "find in cache ${DOTNET_SDK_VERSION}"
@@ -39,7 +39,8 @@ function install_dotnet() {
     rm -f ${DOTNET_CACHE_LOCATION}/sdk/sdk/${DOTNET_SDK_VERSION}/nuGetPackagesArchive.lzma
 
     topic "Fetching .NET Runtime"
-    local DOTNET_RUNTIME_DOWNLOAD_URL=https://dotnetcli.blob.core.windows.net/dotnet/Runtime/$DOTNET_RUNTIME_VERSION/dotnet-runtime-$DOTNET_RUNTIME_VERSION-linux-x64.tar.gz
+    # https://dotnetcli.azureedge.net/dotnet/Runtime/6.0.401/dotnet-runtime-6.0.401-linux-x64.tar.gz
+    local DOTNET_RUNTIME_DOWNLOAD_URL=https://dotnetcli.azureedge.net/dotnet/Runtime/$DOTNET_RUNTIME_VERSION/dotnet-runtime-$DOTNET_RUNTIME_VERSION-linux-x64.tar.gz
     curl -sSL ${DOTNET_RUNTIME_DOWNLOAD_URL} | tar xz -C ${DOTNET_CACHE_LOCATION}/runtime
   fi
   
