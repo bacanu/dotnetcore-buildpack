@@ -31,8 +31,11 @@ function install_dotnet() {
 
     topic "Fetching .NET SDK"
     local DOTNET_SDK_DOWNLOAD_URL=https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-x64.tar.gz
+    info "curl ${DOTNET_SDK_DOWNLOAD_URL} untar to ${DOTNET_CACHE_LOCATION}"
     curl -sSL ${DOTNET_SDK_DOWNLOAD_URL} | tar xz -C ${DOTNET_CACHE_LOCATION}/sdk
+    info "find in cache ${DOTNET_SDK_VERSION}"
     find ${DOTNET_CACHE_LOCATION}/sdk/sdk/${DOTNET_SDK_VERSION}/runtimes/* -maxdepth 0 ! -name unix -exec rm -r {} +
+    info "remove ${DOTNET_SDK_VERSION}"
     rm -f ${DOTNET_CACHE_LOCATION}/sdk/sdk/${DOTNET_SDK_VERSION}/nuGetPackagesArchive.lzma
 
     topic "Fetching .NET Runtime"
